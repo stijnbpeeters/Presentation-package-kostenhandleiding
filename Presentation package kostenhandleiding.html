@@ -8,7 +8,7 @@
 <link href="Presentation package kostenhandleiding_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="Presentation package kostenhandleiding_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Presentation package kostenhandleiding_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.353">
+  <meta name="generator" content="quarto-1.4.549">
 
   <title>Presentation package Dutch Costing Manual</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -30,7 +30,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -220,7 +220,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -401,13 +402,19 @@
 </section>
 <section id="dutch-costing-manual" class="slide level2">
 <h2>Dutch costing manual 📖</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><strong>Guideline chapters</strong></p>
 <p>Seven chapters combining:</p>
 <ul>
 <li><p><em>Cost methodologies</em> 📜</p></li>
 <li><p><em>Reference prices</em> 💸</p></li>
 </ul>
-<embed src="Data/Richtlijn.pdf" type="application/pdf" height="350" width="100%">
+</div><div class="column" style="width:60%;">
+<p><strong>Guideline</strong> <embed src="Data/Richtlijn.pdf" type="application/pdf" height="350" width="100%"></p>
 
+</div>
+</div>
 </section>
 <section id="why-a-package" class="slide level2">
 <h2>Why a package? 📦</h2>
@@ -434,47 +441,137 @@
 <li><em>Price index numbers (paragraph 2.6.1.1)</em></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a href="#cb1-1"></a><span class="co">#' A wrapper function to download CBS data for the CPI.</span></span>
-<span id="cb1-2" class="hljs-ln-code"><a href="#cb1-2"></a><span class="co">#' @param save_cbs_data Should CPI data be saved? Standard is TRUE</span></span>
-<span id="cb1-3" class="hljs-ln-code"><a href="#cb1-3"></a><span class="co">#' @param save_dir Directory where data should be saved. Standard is "data/cbs/"</span></span>
-<span id="cb1-4" class="hljs-ln-code"><a href="#cb1-4"></a><span class="co">#' @param file_name File name for the saved CPI data. Standard is "cbs_cpi.RDS</span></span>
-<span id="cb1-5" class="hljs-ln-code"><a href="#cb1-5"></a><span class="co">#' @keywords Generic, CBS, CPI</span></span>
-<span id="cb1-6" class="hljs-ln-code"><a href="#cb1-6"></a><span class="co">#' @export f_cpi_nl_down</span></span>
-<span id="cb1-7" class="hljs-ln-code"><a href="#cb1-7"></a></span>
-<span id="cb1-8" class="hljs-ln-code"><a href="#cb1-8"></a>f_cpi_nl_down <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb1-9" class="hljs-ln-code"><a href="#cb1-9"></a>                <span class="at">save_cbs_data =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-10" class="hljs-ln-code"><a href="#cb1-10"></a>                <span class="at">save_dir =</span> <span class="st">"data/cbs/"</span>,</span>
-<span id="cb1-11" class="hljs-ln-code"><a href="#cb1-11"></a>                <span class="at">file_name =</span> <span class="st">"cbs_cpi.RDS"</span>){</span>
-<span id="cb1-12" class="hljs-ln-code"><a href="#cb1-12"></a></span>
-<span id="cb1-13" class="hljs-ln-code"><a href="#cb1-13"></a>        <span class="fu">require</span>(<span class="st">"cbsodataR"</span>)</span>
-<span id="cb1-14" class="hljs-ln-code"><a href="#cb1-14"></a>        <span class="fu">require</span>(<span class="st">"here"</span>)</span>
-<span id="cb1-15" class="hljs-ln-code"><a href="#cb1-15"></a>        <span class="fu">require</span>(<span class="st">"dplyr"</span>)</span>
-<span id="cb1-16" class="hljs-ln-code"><a href="#cb1-16"></a></span>
-<span id="cb1-17" class="hljs-ln-code"><a href="#cb1-17"></a>       df_cpi <span class="ot">&lt;-</span> cbsodataR<span class="sc">::</span><span class="fu">cbs_get_data</span>(<span class="st">"83131ned"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-18" class="hljs-ln-code"><a href="#cb1-18"></a>                cbsodataR<span class="sc">::</span><span class="fu">cbs_add_date_column</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb1-19" class="hljs-ln-code"><a href="#cb1-19"></a>                cbsodataR<span class="sc">::</span><span class="fu">cbs_add_label_columns</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb1-20" class="hljs-ln-code"><a href="#cb1-20"></a>                <span class="fu">filter</span>(Perioden_freq <span class="sc">==</span> <span class="st">"Y"</span>,</span>
-<span id="cb1-21" class="hljs-ln-code"><a href="#cb1-21"></a>                       Bestedingscategorieen_label <span class="sc">==</span> <span class="st">"000000 Alle bestedingen"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-22" class="hljs-ln-code"><a href="#cb1-22"></a>                <span class="fu">select</span>(Bestedingscategorieen_label, Perioden_label, CPI_1 )</span>
-<span id="cb1-23" class="hljs-ln-code"><a href="#cb1-23"></a></span>
-<span id="cb1-24" class="hljs-ln-code"><a href="#cb1-24"></a>        <span class="cf">if</span> (save_cbs_data) {</span>
-<span id="cb1-25" class="hljs-ln-code"><a href="#cb1-25"></a>                <span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(here<span class="sc">::</span><span class="fu">here</span>(save_dir))) {</span>
-<span id="cb1-26" class="hljs-ln-code"><a href="#cb1-26"></a>                        <span class="fu">dir.create</span>(here<span class="sc">::</span><span class="fu">here</span>(save_dir), <span class="at">recursive =</span> T)</span>
-<span id="cb1-27" class="hljs-ln-code"><a href="#cb1-27"></a>                }</span>
-<span id="cb1-28" class="hljs-ln-code"><a href="#cb1-28"></a></span>
-<span id="cb1-29" class="hljs-ln-code"><a href="#cb1-29"></a>             readr<span class="sc">::</span><span class="fu">write_rds</span>(<span class="at">x =</span> df_cpi, <span class="at">file =</span> <span class="fu">here</span>(<span class="fu">paste0</span>(save_dir, file_name)))</span>
-<span id="cb1-30" class="hljs-ln-code"><a href="#cb1-30"></a>        }</span>
-<span id="cb1-31" class="hljs-ln-code"><a href="#cb1-31"></a></span>
-<span id="cb1-32" class="hljs-ln-code"><a href="#cb1-32"></a>        df_cpi</span>
-<span id="cb1-33" class="hljs-ln-code"><a href="#cb1-33"></a></span>
-<span id="cb1-34" class="hljs-ln-code"><a href="#cb1-34"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a href=""></a><span class="co">#' A wrapper function to download CBS data for the CPI.</span></span>
+<span id="cb1-2" class="hljs-ln-code"><a href=""></a><span class="co">#' @param save_cbs_data Should CPI data be saved? Standard is TRUE</span></span>
+<span id="cb1-3" class="hljs-ln-code"><a href=""></a><span class="co">#' @param save_dir Directory where data should be saved. Standard is "data/cbs/"</span></span>
+<span id="cb1-4" class="hljs-ln-code"><a href=""></a><span class="co">#' @param file_name File name for the saved CPI data. Standard is "cbs_cpi.RDS</span></span>
+<span id="cb1-5" class="hljs-ln-code"><a href=""></a><span class="co">#' @keywords Generic, CBS, CPI</span></span>
+<span id="cb1-6" class="hljs-ln-code"><a href=""></a><span class="co">#' @export f_cpi_nl_down</span></span>
+<span id="cb1-7" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-8" class="hljs-ln-code"><a href=""></a>f_cpi_nl_down <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb1-9" class="hljs-ln-code"><a href=""></a>                <span class="at">save_cbs_data =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-10" class="hljs-ln-code"><a href=""></a>                <span class="at">save_dir =</span> <span class="st">"data/cbs/"</span>,</span>
+<span id="cb1-11" class="hljs-ln-code"><a href=""></a>                <span class="at">file_name =</span> <span class="st">"cbs_cpi.RDS"</span>){</span>
+<span id="cb1-12" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-13" class="hljs-ln-code"><a href=""></a>        <span class="fu">require</span>(<span class="st">"cbsodataR"</span>)</span>
+<span id="cb1-14" class="hljs-ln-code"><a href=""></a>        <span class="fu">require</span>(<span class="st">"here"</span>)</span>
+<span id="cb1-15" class="hljs-ln-code"><a href=""></a>        <span class="fu">require</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb1-16" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-17" class="hljs-ln-code"><a href=""></a>       df_cpi <span class="ot">&lt;-</span> cbsodataR<span class="sc">::</span><span class="fu">cbs_get_data</span>(<span class="st">"83131ned"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-18" class="hljs-ln-code"><a href=""></a>                cbsodataR<span class="sc">::</span><span class="fu">cbs_add_date_column</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-19" class="hljs-ln-code"><a href=""></a>                cbsodataR<span class="sc">::</span><span class="fu">cbs_add_label_columns</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-20" class="hljs-ln-code"><a href=""></a>                <span class="fu">filter</span>(Perioden_freq <span class="sc">==</span> <span class="st">"Y"</span>,</span>
+<span id="cb1-21" class="hljs-ln-code"><a href=""></a>                       Bestedingscategorieen_label <span class="sc">==</span> <span class="st">"000000 Alle bestedingen"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-22" class="hljs-ln-code"><a href=""></a>                <span class="fu">select</span>(Bestedingscategorieen_label, Perioden_label, CPI_1 )</span>
+<span id="cb1-23" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-24" class="hljs-ln-code"><a href=""></a>        <span class="cf">if</span> (save_cbs_data) {</span>
+<span id="cb1-25" class="hljs-ln-code"><a href=""></a>                <span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(here<span class="sc">::</span><span class="fu">here</span>(save_dir))) {</span>
+<span id="cb1-26" class="hljs-ln-code"><a href=""></a>                        <span class="fu">dir.create</span>(here<span class="sc">::</span><span class="fu">here</span>(save_dir), <span class="at">recursive =</span> T)</span>
+<span id="cb1-27" class="hljs-ln-code"><a href=""></a>                }</span>
+<span id="cb1-28" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-29" class="hljs-ln-code"><a href=""></a>             readr<span class="sc">::</span><span class="fu">write_rds</span>(<span class="at">x =</span> df_cpi, <span class="at">file =</span> <span class="fu">here</span>(<span class="fu">paste0</span>(save_dir, file_name)))</span>
+<span id="cb1-30" class="hljs-ln-code"><a href=""></a>        }</span>
+<span id="cb1-31" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-32" class="hljs-ln-code"><a href=""></a>        df_cpi</span>
+<span id="cb1-33" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-34" class="hljs-ln-code"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="what-do-we-need" class="slide level2">
+<h2>What do we need? 🤔</h2>
+<div style="font-size: 45%;">
+<p><br></p>
+<table>
+<colgroup>
+<col style="width: 36%">
+<col style="width: 42%">
+<col style="width: 17%">
+<col style="width: 1%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Description of type</th>
+<th>Input</th>
+<th>Output</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Function to return the correct indexing factor between two years</td>
+<td>start year, end year</td>
+<td>CPI factor</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Function to print a table of all used CPI indexes used</td>
+<td>start years, end years</td>
+<td>CPI table with years</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Function to discount (costs or effects)</td>
+<td>discount rate, (cycle) time</td>
+<td>Discount rate given (cycle) time</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Function to convert currencies using purchasing power parities (PPP)</td>
+<td>reference year, reference currency, target currency</td>
+<td>Conversion rate</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Function to convert and discount at the same time</td>
+<td>reference year, target year, reference currency, target currency</td>
+<td>Conversion and CPI combined</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Reference prices of guideline stored as data frame</td>
+<td>none</td>
+<td>Data frame with reference prices</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Function to apply yearly depreciation and interest</td>
+<td>new price, replacement price, residual value, depreciation period, interest rate</td>
+<td>yearly depreciation and interest</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Function to return the frictionperiod for a specified year</td>
+<td>year of interest</td>
+<td>friction period</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Function to return productivity costs for a specified year</td>
+<td>year of interest</td>
+<td>productivity costs</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
 <section id="the-road-to-package-development" class="slide level2">
 <h2>The road to package development 🏎️</h2>
-<div class="cell" data-reveal="true" data-fig-height="1000">
+<div class="cell" data-reveal="true" data-fig-height="1000" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class=""><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
   A[Functions are mapped out for each chapter] --&gt; B[Formation of teams consisting of 2/3 individuals]
@@ -485,14 +582,17 @@ E --&gt; F[Bundling the different functions into a package]
 
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
 </section>
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>
@@ -521,7 +621,6 @@ E --&gt; F[Bundling the different functions into a package]
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -672,7 +771,7 @@ E --&gt; F[Bundling the different functions into a package]
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1150,
 
         height: 700,
 
@@ -820,10 +919,9 @@ E --&gt; F[Bundling the different functions into a package]
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -833,8 +931,17 @@ E --&gt; F[Bundling the different functions into a package]
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
