@@ -2,6 +2,8 @@
 title: "Presentation package Dutch Costing Manual"
 format:
   revealjs: 
+   width: 1150
+   margin: 0.1
    theme: default
    mermaid: 
        theme: forest
@@ -16,15 +18,25 @@ navigation-mode: linear
 
 ## Dutch costing manual 📖
 
+::: {.columns}
+::: {.column width="40%"}
+**Guideline chapters**
+
 Seven chapters combining:
 
 -   *Cost methodologies* 📜
 
 -   *Reference prices* 💸
 
+:::
+::: {.column width="60%"}
+**Guideline**
 <embed src = "Data/Richtlijn.pdf" type = "application/pdf" height = 350 width = 100% >
 
 </object>
+
+:::
+:::
 
 ## Why a package? 📦
 
@@ -91,6 +103,23 @@ f_cpi_nl_down <- function(
 
 }
 ```
+
+## What do we need? 🤔
+::: {style="font-size: 45%;"}
+<br>
+
+| Description of type                                                  | Input                                                                            | Output                           |   |   |
+|----------------------------------------------------------------------|----------------------------------------------------------------------------------|----------------------------------|---|---|
+| Function to return the correct indexing factor between two years     | start year, end year                                                             | CPI factor                       |   |   |
+| Function to print a table of all used CPI indexes used               | start years, end years                                                           | CPI table with years             |   |   |
+| Function to discount (costs or effects)                              | discount rate, (cycle) time                                                      | Discount rate given (cycle) time |   |   |
+| Function to convert currencies using purchasing power parities (PPP) | reference year, reference currency, target currency                              | Conversion rate                  |   |   |
+| Function to convert and discount at the same time                    | reference year, target year, reference currency, target currency                 | Conversion and CPI combined      |   |   |
+| Reference prices of guideline stored as data frame                   | none                                                                             | Data frame with reference prices |   |   |
+| Function to apply yearly depreciation and interest                   | new price, replacement price, residual value, depreciation period, interest rate | yearly depreciation and interest |   |   |
+| Function to return the frictionperiod for a specified year           | year of interest                                                                 | friction period                  |   |   |
+| Function to return productivity costs for a specified year           | year of interest                                                                 | productivity costs               |   |   |
+:::
 
 ## The road to package development 🏎️
 
