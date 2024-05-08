@@ -39,17 +39,15 @@ Seven chapters combining:
 
 In the **valuation** of units, **three topics merit attention**:
 
-::: {.fragment .highlight-red}
 1.  *Price index numbers (paragraph 2.6.1.1)*
-:::
 
-::: {.fragment .fade-out}
+
 2.  *Discounting (paragraph 2.6.1.2)*
-:::
 
-::: {.fragment .fade-out}
+
+
 3.  *Conversion factors (paragraph 2.6.1.3)*
-:::
+
 
 ## Example - Chapter 2 {auto-animate="true"}
 
