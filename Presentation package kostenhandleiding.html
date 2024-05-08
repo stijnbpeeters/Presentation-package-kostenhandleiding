@@ -401,13 +401,19 @@
 </section>
 <section id="dutch-costing-manual" class="slide level2">
 <h2>Dutch costing manual 📖</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><strong>Guideline chapters</strong></p>
 <p>Seven chapters combining:</p>
 <ul>
 <li><p><em>Cost methodologies</em> 📜</p></li>
 <li><p><em>Reference prices</em> 💸</p></li>
 </ul>
-<embed src="Data/Richtlijn.pdf" type="application/pdf" height="350" width="100%">
+</div><div class="column" style="width:60%;">
+<p><strong>Guideline</strong> <embed src="Data/Richtlijn.pdf" type="application/pdf" height="350" width="100%"></p>
 
+</div>
+</div>
 </section>
 <section id="why-a-package" class="slide level2">
 <h2>Why a package? 📦</h2>
@@ -470,6 +476,95 @@
 <span id="cb1-34" class="hljs-ln-code"><a href="#cb1-34"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section id="what-do-we-need" class="slide level2">
+<h2>What do we need? 🤔</h2>
+<div style="font-size: 45%;">
+<p><br></p>
+<table>
+<colgroup>
+<col style="width: 36%">
+<col style="width: 42%">
+<col style="width: 17%">
+<col style="width: 1%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Description of type</th>
+<th>Input</th>
+<th>Output</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Function to return the correct indexing factor between two years</td>
+<td>start year, end year</td>
+<td>CPI factor</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Function to print a table of all used CPI indexes used</td>
+<td>start years, end years</td>
+<td>CPI table with years</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Function to discount (costs or effects)</td>
+<td>discount rate, (cycle) time</td>
+<td>Discount rate given (cycle) time</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Function to convert currencies using purchasing power parities (PPP)</td>
+<td>reference year, reference currency, target currency</td>
+<td>Conversion rate</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Function to convert and discount at the same time</td>
+<td>reference year, target year, reference currency, target currency</td>
+<td>Conversion and CPI combined</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Reference prices of guideline stored as data frame</td>
+<td>none</td>
+<td>Data frame with reference prices</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Function to apply yearly depreciation and interest</td>
+<td>new price, replacement price, residual value, depreciation period, interest rate</td>
+<td>yearly depreciation and interest</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Function to return the frictionperiod for a specified year</td>
+<td>year of interest</td>
+<td>friction period</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Function to return productivity costs for a specified year</td>
+<td>year of interest</td>
+<td>productivity costs</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="the-road-to-package-development" class="slide level2">
 <h2>The road to package development 🏎️</h2>
 <div class="cell" data-reveal="true" data-fig-height="1000">
@@ -478,19 +573,16 @@
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
   A[Functions are mapped out for each chapter] --&gt; B[Formation of teams consisting of 2/3 individuals]
-B --&gt; C[Each team selects a chapter and function]
-C --&gt; D[Working in the R Journal Club on this function]
-D --&gt; E[Presentation per team about the background and progress of their function]
-E --&gt; F[Bundling the different functions into a package]
-
+B --&gt; C[Each team selects a function]
+C --&gt; D[Working in the R Journal Club on this function in three ways]
+D --&gt; E[Validating]
+D --&gt; F[Rewriting - start from scratch]
+D --&gt; G[Find and write]
 </pre>
 </div>
 </div>
 </div>
 </div>
-</section>
-<section id="agenda" class="slide level2">
-<h2>Agenda</h2>
 <div class="footer footer-default">
 
 </div>
@@ -672,7 +764,7 @@ E --&gt; F[Bundling the different functions into a package]
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1050,
+        width: 1150,
 
         height: 700,
 
