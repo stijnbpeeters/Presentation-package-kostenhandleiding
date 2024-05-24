@@ -57,7 +57,6 @@ In the **valuation** of units, **three topics merit attention**:
 2.  *Discounting (paragraph 2.6.1.2)*
 
 
-
 3.  *Conversion factors (paragraph 2.6.1.3)*
 
 
@@ -127,11 +126,10 @@ f_cpi_nl_down <- function(
 %%| fig-height: 1000
 flowchart TD
   A[Functions are mapped out for each chapter] --> B[Formation of teams consisting of 2/3 individuals]
-B --> C[Each team selects a chapter and function]
-C --> D[Working in the R Journal Club on this function]
-D --> E[Presentation per team about the background and progress of their function]
-E --> F[Bundling the different functions into a package]
-
+B --> C[Each team selects a function]
+C --> D[Working in the R Journal Club on this function in three ways]
+D --> E[Validating]
+D --> F[Rewriting - start from scratch]
+D --> G[Find and write]
 ```
 
-## Agenda
